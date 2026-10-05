@@ -1,0 +1,192 @@
+.landing-page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: #000;
+  color: #fff;
+}
+
+.landing-content {
+  min-width: 0;
+  flex: 1 0 auto;
+  padding:
+    clamp(12px, min(4vw, 4dvh), 40px)
+    clamp(16px, 3vw, 24px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-content > * {
+  flex-shrink: 0;
+}
+
+.landing-banner {
+  flex: none;
+  height: 75px;
+  overflow: clip;
+  transition: height 0.5s ease;
+}
+
+.landing-banner--bottom {
+  position: relative;
+}
+
+.landing-scene {
+  width: 100%;
+  height: 75px;
+
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    var(--scene-image);
+  background-repeat: no-repeat;
+  background-size: 100% 100%, cover;
+
+  transition: transform 0.5s ease;
+}
+
+.landing-scene--top {
+  background-position: center, left center;
+  border-bottom: 1px solid #22d3ee;
+  animation: sceneFromTop 0.7s ease-out;
+}
+
+.landing-scene--bottom {
+  background-position: center, right center;
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid #22d3ee;
+  animation: sceneFromBottom 0.7s ease-out;
+}
+
+.landing-logo {
+  display: block;
+  width: min(80vw, 75dvh, 760px);
+  max-width: 100%;
+  height: auto;
+}
+
+.landing-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(8px, min(1.5vw, 2dvh), 12px);
+  margin-top: clamp(16px, min(3vw, 3dvh), 28px);
+
+  animation: fadeInUp 0.7s ease-out 0.15s both;
+}
+
+.landing-button {
+  min-width: clamp(150px, min(20vw, 24dvh), 170px);
+  min-height: 44px;
+  padding:
+    clamp(8px, min(1.5vw, 2dvh), 12px)
+    clamp(12px, min(2vw, 3dvh), 20px);
+  border: 1px solid #fff;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #fff;
+  font-size: clamp(1rem, min(2vw, 3dvh), 1.125rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.landing-button:hover {
+  background-color: #ffcc00;
+  color: #000;
+  border-color: #000;
+  box-shadow: 0 0 12px rgba(255, 204, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+.landing-intro {
+  width: min(80vw, 100%, 680px);
+  margin: clamp(20px, min(4vw, 4dvh), 36px) auto 0;
+  color: #cfcfcf;
+  font-size: 1rem;
+  line-height: clamp(1.5em, min(3vw, 4dvh), 1.7em);
+  text-align: left;
+
+  animation: fadeIn 2.5s ease-out 0.55s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sceneFromTop {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes sceneFromBottom {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .landing-banner {
+    height: 0;
+  }
+
+  .landing-scene--top {
+    transform: translateY(-100%);
+  }
+
+  .landing-scene--bottom {
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-banner,
+  .landing-scene,
+  .landing-actions,
+  .landing-intro,
+  .landing-button {
+    animation: none;
+    transition: none;
+  }
+
+  .landing-button:hover {
+    transform: none;
+  }
+}
