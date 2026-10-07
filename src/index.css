@@ -1,3 +1,24 @@
+:root {
+  --color-black: #000;
+
+  --color-surface: #17191c;
+  --color-control-background: #111;
+
+  --color-text: #fff;
+  --color-text-muted: #cfcfcf;
+
+  --color-accent: #22d3ee;
+  --color-highlight: #ffcc00;
+
+  --color-card-border: rgba(34, 211, 238, 0.16);
+  --color-subtle-border: rgba(34, 211, 238, 0.2);
+  --color-control-border: rgba(34, 211, 238, 0.3);
+
+  --color-accent-glow: rgba(34, 211, 238, 0.5);
+  --color-highlight-glow: rgba(255, 204, 0, 0.5);
+  --color-highlight-tint: rgba(255, 204, 0, 0.06);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -17,7 +38,7 @@ body,
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 button,

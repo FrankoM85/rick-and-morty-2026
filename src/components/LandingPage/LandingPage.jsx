@@ -3,7 +3,7 @@ import logo from "../../assets/logo.png";
 import topScene from "../../assets/landing-scene-top.jpg";
 import bottomScene from "../../assets/landing-scene-bottom.jpg";
 
-function LandingPage() {
+function LandingPage({ onCharactersClick, onLocationsClick, onEpisodesClick }) {
   return (
     <main className="landing-page">
       <div className="landing-banner landing-banner--top" aria-hidden="true">
@@ -17,12 +17,19 @@ function LandingPage() {
         <img className="landing-logo" src={logo} alt="Rick and Morty" />
 
         <div className="landing-actions">
-          <button type="button" className="landing-button">
+          <button
+            type="button"
+            className="landing-button"
+            onClick={onCharactersClick}
+          >
             Characters
           </button>
 
-          <button type="button" className="landing-button">
+          <button type="button" className="landing-button" onClick={onLocationsClick}>
             Locations
+          </button>
+          <button type="button" className="landing-button" onClick={onEpisodesClick}>
+            Episodes
           </button>
         </div>
 
