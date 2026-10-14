@@ -11,4 +11,3 @@ export function useEpisodes(page = 1, searchQuery = "") {
 
   return useFetch(`${endpoints.episodes}?${params.toString()}`);
 }
-

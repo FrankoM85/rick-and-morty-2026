@@ -11,4 +11,3 @@ export function useLocations(page = 1, searchQuery = "") {
 
   return useFetch(`${endpoints.locations}?${params.toString()}`);
 }
-

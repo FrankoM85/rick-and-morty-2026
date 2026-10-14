@@ -1,0 +1,27 @@
+.app-shell {
+  --navbar-height: 56px;
+  min-height: 100dvh;
+  padding-top: var(--navbar-height);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-black);
+}
+
+.app-shell__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.app-shell__content > main {
+  flex: 1;
+  min-height: 0;
+}
+
+.app-shell__content .characters-grid > .character-card {
+  scroll-margin-top: var(--navbar-height);
+}
+
+main[tabindex="-1"]:focus {
+  outline: none;
+}

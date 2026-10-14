@@ -1,13 +1,35 @@
-import "./LocationCard.css";
+import "./locationCard.css";
 
 function LocationIcon({ kind, className }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
       {kind === "dimension" ? (
         <>
           <circle cx="12" cy="12" r="1" />
-          <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(45 12 12)" />
-          <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-45 12 12)" />
+          <ellipse
+            cx="12"
+            cy="12"
+            rx="10"
+            ry="4"
+            transform="rotate(45 12 12)"
+          />
+          <ellipse
+            cx="12"
+            cy="12"
+            rx="10"
+            ry="4"
+            transform="rotate(-45 12 12)"
+          />
         </>
       ) : kind === "type" ? (
         <>
@@ -44,16 +66,27 @@ function LocationCard({ location }) {
       </div>
       <dl className="location-card__facts">
         <div className="location-card__fact">
-          <dt><LocationIcon kind="type" className="location-card__icon" /><span>Type</span></dt>
+          <dt>
+            <LocationIcon kind="type" className="location-card__icon" />
+            <span>Type</span>
+          </dt>
           <dd>{location.type || "Unknown"}</dd>
         </div>
         <div className="location-card__fact">
-          <dt><LocationIcon kind="dimension" className="location-card__icon" /><span>Dimension</span></dt>
+          <dt>
+            <LocationIcon kind="dimension" className="location-card__icon" />
+            <span>Dimension</span>
+          </dt>
           <dd>{location.dimension || "Unknown"}</dd>
         </div>
         <div className="location-card__fact">
-          <dt><LocationIcon kind="residents" className="location-card__icon" /><span>Residents</span></dt>
-          <dd>{residentCount} {residentCount === 1 ? "resident" : "residents"}</dd>
+          <dt>
+            <LocationIcon kind="residents" className="location-card__icon" />
+            <span>Residents</span>
+          </dt>
+          <dd>
+            {residentCount} {residentCount === 1 ? "resident" : "residents"}
+          </dd>
         </div>
       </dl>
     </article>

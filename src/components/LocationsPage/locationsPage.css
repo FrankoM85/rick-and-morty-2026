@@ -141,7 +141,8 @@
   font-size: 0.75rem;
 }
 
-.locations-pagination--compact .locations-pagination__button:not(:disabled):hover {
+.locations-pagination--compact
+  .locations-pagination__button:not(:disabled):hover {
   background: var(--color-highlight-tint);
   border-color: transparent;
   color: var(--color-highlight);
@@ -171,7 +172,6 @@
     margin-top: 0;
   }
 }
-
 
 .locations-header {
   animation: locationsPageEnter 400ms ease-out backwards;

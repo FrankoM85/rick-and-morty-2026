@@ -14,7 +14,9 @@ export function useFetch(url) {
     fetch(url, { signal: controller.signal })
       .then((response) => {
         if (!response.ok) {
-          const httpError = new Error(`Request failed with status ${response.status}`);
+          const httpError = new Error(
+            `Request failed with status ${response.status}`,
+          );
           httpError.status = response.status;
           httpError.requestUrl = url;
           throw httpError;
@@ -43,7 +45,13 @@ export function useFetch(url) {
   }, [url, retryCount]);
 
   // Treat a changed URL/retry as pending even before its effect runs.
-  const currentRequest = request?.url === url && request?.retryCount === retryCount;
+  const currentRequest =
+    request?.url === url && request?.retryCount === retryCount;
   if (request && !currentRequest) setRequest(null);
-  return { data, loading: !currentRequest, error: currentRequest ? request.error : null, retry };
+  return {
+    data,
+    loading: !currentRequest,
+    error: currentRequest ? request.error : null,
+    retry,
+  };
 }

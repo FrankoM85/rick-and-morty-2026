@@ -1,9 +1,0 @@
-.app-shell {
-  --navbar-height: 56px;
-  min-height: 100dvh;
-  padding-top: var(--navbar-height);
-}
-
-.app-shell__content .characters-grid > .character-card {
-  scroll-margin-top: var(--navbar-height);
-}

@@ -1,9 +1,10 @@
 import { useLayoutEffect, useRef } from "react";
-import "./CharacterCard.css";
+import "./characterCard.css";
 
 function CharacterCard({ character, onSelect, isSelected }) {
   const status = character.status?.toLowerCase();
-  const statusClass = status === "alive" || status === "dead" ? status : "unknown";
+  const statusClass =
+    status === "alive" || status === "dead" ? status : "unknown";
   const detailsRef = useRef(null);
   const buttonRef = useRef(null);
 
@@ -81,10 +82,22 @@ function CharacterCard({ character, onSelect, isSelected }) {
               id={`character-details-${character.id}`}
             >
               <dl className="character-card__details">
-                <div><dt>Gender</dt><dd>{character.gender}</dd></div>
-                <div><dt>Origin</dt><dd>{character.origin.name}</dd></div>
-                <div><dt>Current location</dt><dd>{character.location.name}</dd></div>
-                <div><dt>Episodes</dt><dd>{character.episode.length} appearances</dd></div>
+                <div>
+                  <dt>Gender</dt>
+                  <dd>{character.gender}</dd>
+                </div>
+                <div>
+                  <dt>Origin</dt>
+                  <dd>{character.origin.name}</dd>
+                </div>
+                <div>
+                  <dt>Current location</dt>
+                  <dd>{character.location.name}</dd>
+                </div>
+                <div>
+                  <dt>Episodes</dt>
+                  <dd>{character.episode.length} appearances</dd>
+                </div>
               </dl>
             </div>
           </div>

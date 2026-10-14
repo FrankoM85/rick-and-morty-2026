@@ -3,9 +3,9 @@ import { useLocations } from "../../api/useLocations";
 import LocationCard from "../LocationCard/LocationCard";
 import ResultsState from "../ResultsState/ResultsState";
 import { endpoints } from "../../api/endpoints";
-import "./LocationsPage.css";
+import "./locationsPage.css";
 
-function LocationsPage() {
+function LocationsPage({ mainRef }) {
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
@@ -39,10 +39,15 @@ function LocationsPage() {
   const locations = data?.results ?? [];
   const requestParams = new URLSearchParams({ page: String(page) });
   if (debouncedSearch.trim()) requestParams.set("name", debouncedSearch.trim());
-  const currentRequestUrl = endpoints.locations + "?" + requestParams.toString();
-  const noSearchResults = error?.status === 404 && page === 1 &&
-    Boolean(debouncedSearch.trim()) && error.requestUrl === currentRequestUrl;
-  const empty = !loading && (noSearchResults || (!error && locations.length === 0));
+  const currentRequestUrl =
+    endpoints.locations + "?" + requestParams.toString();
+  const noSearchResults =
+    error?.status === 404 &&
+    page === 1 &&
+    Boolean(debouncedSearch.trim()) &&
+    error.requestUrl === currentRequestUrl;
+  const empty =
+    !loading && (noSearchResults || (!error && locations.length === 0));
   const showGrid = locations.length > 0 && (loading || (!error && !empty));
   const totalPages = data?.info?.pages;
   const validPagination = Number.isInteger(totalPages) && totalPages >= 1;
@@ -59,19 +64,26 @@ function LocationsPage() {
 
     // Block repeated input before the fetch effect updates loading.
     paginationPendingRef.current = true;
-    setPage((current) => Math.min(totalPages, Math.max(1, current + direction)));
+    setPage((current) =>
+      Math.min(totalPages, Math.max(1, current + direction)),
+    );
     if (scrollToResults) {
       resultsRef.current?.scrollIntoView({
-      block: "start",
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "instant"
-        : "smooth",
+        block: "start",
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "instant"
+          : "smooth",
       });
     }
   }
 
   return (
-    <main className="locations-page">
+    <main
+      className="locations-page"
+      ref={mainRef}
+      tabIndex={-1}
+      aria-label="Locations"
+    >
       <header className="locations-header">
         <div className="locations-heading">
           <h1 className="locations-title">Locations</h1>
@@ -90,80 +102,110 @@ function LocationsPage() {
             onChange={handleSearchChange}
           />
         </div>
-
       </header>
 
       <div className="locations-results" ref={resultsRef}>
         <div className="locations-results-toolbar">
-        <nav
-          className="locations-pagination locations-pagination--compact"
-          style={!showGrid || !validPagination ? { visibility: "hidden" } : undefined}
-          inert={!showGrid || !validPagination}
-          aria-hidden={!showGrid || !validPagination}
-          aria-label="Top location pagination"
-        >
-          <button
-            className="locations-pagination__button"
-            type="button"
-            disabled={!canPaginate || page <= 1}
-            onClick={() => handlePageChange(-1, { scrollToResults: false })}
+          <nav
+            className="locations-pagination locations-pagination--compact"
+            style={
+              !showGrid || !validPagination
+                ? { visibility: "hidden" }
+                : undefined
+            }
+            inert={!showGrid || !validPagination}
+            aria-hidden={!showGrid || !validPagination}
+            aria-label="Top location pagination"
           >
-            <span aria-hidden="true">‹ </span>PREVIOUS
-          </button>
-          <span className="locations-pagination__status" aria-label={loading ? `Loading page ${page}` : `Page ${page} of ${totalPages}`}>
-            {loading ? "Loading..." : `${page} / ${totalPages}`}
-          </span>
-          <button
-            className="locations-pagination__button"
-            type="button"
-            disabled={!canPaginate || page >= totalPages}
-            onClick={() => handlePageChange(1, { scrollToResults: false })}
-          >
-            NEXT<span aria-hidden="true"> ›</span>
-          </button>
-        </nav>
+            <button
+              className="locations-pagination__button"
+              type="button"
+              disabled={!canPaginate || page <= 1}
+              onClick={() => handlePageChange(-1, { scrollToResults: false })}
+            >
+              <span aria-hidden="true">‹ </span>PREVIOUS
+            </button>
+            <span
+              className="locations-pagination__status"
+              aria-label={
+                loading
+                  ? `Loading page ${page}`
+                  : `Page ${page} of ${totalPages}`
+              }
+            >
+              {loading ? "Loading..." : `${page} / ${totalPages}`}
+            </span>
+            <button
+              className="locations-pagination__button"
+              type="button"
+              disabled={!canPaginate || page >= totalPages}
+              onClick={() => handlePageChange(1, { scrollToResults: false })}
+            >
+              NEXT<span aria-hidden="true"> ›</span>
+            </button>
+          </nav>
         </div>
-      {loading && <ResultsState variant="loading" resource="locations" compact={showGrid} page={page} />}
-      {empty && <ResultsState variant="empty" resource="locations" filtered={Boolean(debouncedSearch.trim())} />}
-      {!loading && error && !noSearchResults && <ResultsState variant="error" resource="locations" onRetry={retry} />}
-      {showGrid && (
-        <div className="locations-grid">
-          {locations.map((location) => (
-            <LocationCard
-              key={location.id}
-              location={location}
-            />
-          ))}
-        </div>
-      )}
-      {showGrid && validPagination && (
-        <nav className="locations-pagination" aria-label="Location pagination">
-          <button
-            className="locations-pagination__button"
-            type="button"
-            disabled={!canPaginate || page <= 1}
-            onClick={() => handlePageChange(-1)}
+        {loading && (
+          <ResultsState
+            variant="loading"
+            resource="locations"
+            compact={showGrid}
+            page={page}
+          />
+        )}
+        {empty && (
+          <ResultsState
+            variant="empty"
+            resource="locations"
+            filtered={Boolean(debouncedSearch.trim())}
+          />
+        )}
+        {!loading && error && !noSearchResults && (
+          <ResultsState variant="error" resource="locations" onRetry={retry} />
+        )}
+        {showGrid && (
+          <div className="locations-grid">
+            {locations.map((location) => (
+              <LocationCard key={location.id} location={location} />
+            ))}
+          </div>
+        )}
+        {showGrid && validPagination && (
+          <nav
+            className="locations-pagination"
+            aria-label="Location pagination"
           >
-            <span aria-hidden="true">‹ </span>PREVIOUS
-          </button>
-          <span className="locations-pagination__status" aria-label={loading ? `Loading page ${page}` : `Page ${page} of ${totalPages}`}>
-            {loading ? "Loading..." : `${page} / ${totalPages}`}
-          </span>
-          <button
-            className="locations-pagination__button"
-            type="button"
-            disabled={!canPaginate || page >= totalPages}
-            onClick={() => handlePageChange(1)}
-          >
-            NEXT<span aria-hidden="true"> ›</span>
-          </button>
-        </nav>
-      )}
+            <button
+              className="locations-pagination__button"
+              type="button"
+              disabled={!canPaginate || page <= 1}
+              onClick={() => handlePageChange(-1)}
+            >
+              <span aria-hidden="true">‹ </span>PREVIOUS
+            </button>
+            <span
+              className="locations-pagination__status"
+              aria-label={
+                loading
+                  ? `Loading page ${page}`
+                  : `Page ${page} of ${totalPages}`
+              }
+            >
+              {loading ? "Loading..." : `${page} / ${totalPages}`}
+            </span>
+            <button
+              className="locations-pagination__button"
+              type="button"
+              disabled={!canPaginate || page >= totalPages}
+              onClick={() => handlePageChange(1)}
+            >
+              NEXT<span aria-hidden="true"> ›</span>
+            </button>
+          </nav>
+        )}
       </div>
     </main>
   );
 }
 
 export default LocationsPage;
-
-

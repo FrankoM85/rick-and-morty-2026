@@ -1,8 +1,18 @@
-import "./EpisodeCard.css";
+import "./episodeCard.css";
 
 function EpisodeIcon({ kind, className }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
       {kind === "episode" ? (
         <>
           <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -39,16 +49,27 @@ function EpisodeCard({ episode }) {
       </div>
       <dl className="episode-card__facts">
         <div className="episode-card__fact">
-          <dt><EpisodeIcon kind="episode" className="episode-card__icon" /><span>Episode</span></dt>
+          <dt>
+            <EpisodeIcon kind="episode" className="episode-card__icon" />
+            <span>Episode</span>
+          </dt>
           <dd className="episode-card__code">{episode.episode}</dd>
         </div>
         <div className="episode-card__fact">
-          <dt><EpisodeIcon kind="calendar" className="episode-card__icon" /><span>Air date</span></dt>
+          <dt>
+            <EpisodeIcon kind="calendar" className="episode-card__icon" />
+            <span>Air date</span>
+          </dt>
           <dd>{episode.air_date}</dd>
         </div>
         <div className="episode-card__fact">
-          <dt><EpisodeIcon kind="characters" className="episode-card__icon" /><span>Characters</span></dt>
-          <dd>{characterCount} {characterCount === 1 ? "character" : "characters"}</dd>
+          <dt>
+            <EpisodeIcon kind="characters" className="episode-card__icon" />
+            <span>Characters</span>
+          </dt>
+          <dd>
+            {characterCount} {characterCount === 1 ? "character" : "characters"}
+          </dd>
         </div>
       </dl>
     </article>

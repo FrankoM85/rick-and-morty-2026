@@ -8,12 +8,13 @@
   z-index: 100;
   height: var(--navbar-height);
   background: linear-gradient(
-    90deg,
-    var(--color-black) 0%,
-    #050505 30%,
-    #101010 65%,
-    #191919 100%
-  ) left / calc(100% - var(--navbar-panel-width)) 100% no-repeat #191919;
+      90deg,
+      var(--color-black) 0%,
+      #050505 30%,
+      #101010 65%,
+      #191919 100%
+    )
+    left / calc(100% - var(--navbar-panel-width)) 100% no-repeat #191919;
   color: var(--color-accent);
 }
 
@@ -227,14 +228,20 @@ button.navbar__link:hover {
   height: 2px;
   background: currentColor;
   border-radius: 1px;
-  transition: transform 220ms ease, opacity 220ms ease;
+  transition:
+    transform 220ms ease,
+    opacity 220ms ease;
 }
 
-.navbar__menu-trigger[aria-expanded="true"] .navbar__hamburger span:first-child {
+.navbar__menu-trigger[aria-expanded="true"]
+  .navbar__hamburger
+  span:first-child {
   transform: translateY(6px) rotate(45deg);
 }
 
-.navbar__menu-trigger[aria-expanded="true"] .navbar__hamburger span:nth-child(2) {
+.navbar__menu-trigger[aria-expanded="true"]
+  .navbar__hamburger
+  span:nth-child(2) {
   opacity: 0;
 }
 

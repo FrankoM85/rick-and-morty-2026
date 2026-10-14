@@ -1,11 +1,22 @@
-import "./LandingPage.css";
+import "./landingPage.css";
 import logo from "../../assets/logo.png";
 import topScene from "../../assets/landing-scene-top.jpg";
 import bottomScene from "../../assets/landing-scene-bottom.jpg";
+import Footer from "../Footer/Footer";
 
-function LandingPage({ onCharactersClick, onLocationsClick, onEpisodesClick }) {
+function LandingPage({
+  mainRef,
+  onCharactersClick,
+  onLocationsClick,
+  onEpisodesClick,
+}) {
   return (
-    <main className="landing-page">
+    <main
+      className="landing-page"
+      ref={mainRef}
+      tabIndex={-1}
+      aria-label="Rick and Morty Multiverse Explorer home"
+    >
       <div className="landing-banner landing-banner--top" aria-hidden="true">
         <div
           className="landing-scene landing-scene--top"
@@ -25,10 +36,18 @@ function LandingPage({ onCharactersClick, onLocationsClick, onEpisodesClick }) {
             Characters
           </button>
 
-          <button type="button" className="landing-button" onClick={onLocationsClick}>
+          <button
+            type="button"
+            className="landing-button"
+            onClick={onLocationsClick}
+          >
             Locations
           </button>
-          <button type="button" className="landing-button" onClick={onEpisodesClick}>
+          <button
+            type="button"
+            className="landing-button"
+            onClick={onEpisodesClick}
+          >
             Episodes
           </button>
         </div>
@@ -40,6 +59,8 @@ function LandingPage({ onCharactersClick, onLocationsClick, onEpisodesClick }) {
           button.
         </p>
       </div>
+
+      <Footer />
 
       <div className="landing-banner landing-banner--bottom" aria-hidden="true">
         <div

@@ -141,7 +141,8 @@
   font-size: 0.75rem;
 }
 
-.episodes-pagination--compact .episodes-pagination__button:not(:disabled):hover {
+.episodes-pagination--compact
+  .episodes-pagination__button:not(:disabled):hover {
   background: var(--color-highlight-tint);
   border-color: transparent;
   color: var(--color-highlight);
@@ -171,7 +172,6 @@
     margin-top: 0;
   }
 }
-
 
 .episodes-header {
   animation: episodesPageEnter 400ms ease-out backwards;
